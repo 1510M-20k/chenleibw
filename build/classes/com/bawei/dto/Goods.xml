@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bawei.dao.GoodsDao">
+	<select id="pai" resultType="com.bawei.dto.Pai" >
+			select * from a_pai
+	</select>
+	<select id="list" resultType="com.bawei.dto.Goods" parameterType="com.bawei.dto.Goods" >
+			select * from a_goods
+				<where>
+						<if test="pid!=null and pid!=''">
+							and pid=${pid}
+						</if>
+						<if test="stock!=null  and stock!=''">
+							and stock not in(select stock from a_goods where stock=0)
+						</if> 
+						
+					</where>
+	</select>
+	<select id="bra" resultType="com.bawei.dto.Pai" para3meterType="com.bawei.dto.Pai">
+			select * from a_pai
+			<where>
+						<if test="pid!=null and pid!=''">
+							pid=${pid}
+						</if>
+					</where>
+	</select>
+</mapper>
